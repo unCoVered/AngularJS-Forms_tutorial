@@ -1,6 +1,6 @@
 var app = angular.module("app", []);
 
-function SeguroController($scope) {
+app.controller("SeguroController", function ($scope) {
     $scope.seguro = {
         nif : "",
         nombre : "",
@@ -28,4 +28,4 @@ function SeguroController($scope) {
     $scope.disableNombreAlergia = function () {
         return ($scope.seguro.enfermedades.alergia === false);
     };
-}
+});
