@@ -2,15 +2,20 @@
 <html ng-app="app">
 
     <head>
+        <link rel="stylesheet" href="css/style.css">
         <script src ="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
         <script src="js/script.js"></script>
     </head>
     
     <body ng-controller="PruebaController">
-        <h1>{{mensaje}}</h1>
-        <button ng-click="cambiarMensaje()">Cambio</button>
+        <input ng-model="clasesCss.rojo" type="checkbox"> Aplicar estilo rojorl
         <br>
-        Mensaje: <input ng-model="mensaje">
+        <input ng-model="clasesCss.subrayado" type="checkbox"> Aplicar estilo subrayao
+        <br>
+        <input ng-model="clasesCss.negrita" type="checkbox"> Aplicar estilo negrin
+        <br>
+        <br>
+        <div ng-class="clasesCss">Este es un texto con clases dinamicas</div>
     </body>
     
 </html>

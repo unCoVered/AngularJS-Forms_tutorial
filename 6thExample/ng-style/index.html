@@ -7,10 +7,12 @@
     </head>
     
     <body ng-controller="PruebaController">
-        <h1>{{mensaje}}</h1>
-        <button ng-click="cambiarMensaje()">Cambio</button>
+        Escribe el color del texto (formato HTML): <input ng-model="estilo.color">
         <br>
-        Mensaje: <input ng-model="mensaje">
+        Escribe el color del fondo (formato HTML):<input ng-model="estilo.backgroundColor">
+        <br>
+        <br>
+        <div ng-style="estilo">Este es un texto con colores dinamicos</div>
     </body>
     
 </html>
