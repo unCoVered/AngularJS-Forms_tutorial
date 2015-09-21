@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+    <head>
+        <script src ="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+        <script src="js/script.js"></script>
+    </head>
+    
+    <body ng-controller="PruebaController">
+        Escribe una A o una B o cozas random: <input ng-model="valor">
+        
+        <div ng-switch on="valor">
+            <div ng-switch-when="A">Texto para las A</div>
+            <div ng-switch-when="B">La B tiene otro texto</div>
+            <div ng-switch-default>Texto randommmm</div>
+        </div>
+    </body>
+    
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+    <head>
+        <script src ="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+        <script src="js/script.js"></script>
+    </head>
+    
+    <body ng-controller="PruebaController">
+
+        <input type="checkbox" ng-model="modelo.showNombre"> Mostrar name?
+        <br>
+        <div ng-if="modelo.showNombre">
+            Nombre: <input ng-model="modelo.nombre">
+            <br>
+            Valor del nombre en el $scope de ng-if es : {{modelo.nombre}}
+        </div>
+        El valor del nombre en el $scope del controller es : {{modelo.nombre}} debido al uso de 'modelo.nombre'
+        
+        <hr>
+        
+        <input type="checkbox" ng-model="modelo.showApellido"> Mostrar surname?
+        <br>
+        <div ng-if="modelo.showApellido">
+            Apellido: <input ng-model="modelo.apellido">
+            <br>
+            Valor del nombre en el $scope de ng-if es : {{modelo.apellido}}
+        </div>
+        El valor del nombre en el $scope del controller es : {{modelo.apellido}} debido al uso de 'modelo.apellido'
+        
+    </body>
+    
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+    <head>
+        <script src ="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+        <script src="js/script.js"></script>
+    </head>
+    
+    <body ng-controller="PruebaController">
+        <table>
+            <thead>
+                <tr>
+                    <th>IdProvincia</th>
+                    <th>Nombre</th>
+                    <th>Num Fila</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="provincia in provincias track by provincia.idProvincia" style="background-color:{{$even?'white':'yellow'}}"> 
+                    <td>{{provincia.idProvincia}}</td>
+                    <td>{{provincia.nombre}}</td>
+                    <td>{{$index}}</td>
+            </tbody>
+        </table>
+        
+        <h3>Repeticion de etiquetas</h3>        
+        <strong ng-repeat-start="provincia in provincias track by provincia.idProvincia" >{{provincia.idProvincia}}</strong>
+        {{provincia.nombre}}
+        <br ng-repeat-end>
+    </body>
+    
+</html>

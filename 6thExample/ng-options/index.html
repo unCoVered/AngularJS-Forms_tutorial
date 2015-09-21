@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+    <head>
+        <script src ="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+        <script src="js/script.js"></script>
+    </head>
+    
+    <body ng-controller="PruebaController">
+
+        <select ng-model="miProvinciaSeleccionada" ng-options="provincia as provincia.nombre for provincia in provincias track by provincia.idProvincia" >
+            <option value="">--Elige ko--</option>
+        </select>
+        
+        <br>
+        
+        La provincia eeeeezzz : {{miProvinciaSeleccionada.nombre}}
+        
+    </body>
+    
+</html>
