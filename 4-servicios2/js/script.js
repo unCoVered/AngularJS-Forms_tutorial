@@ -61,7 +61,7 @@ app.controller("SeguroController", ['$scope', 'remoteResource', function ($scope
     });
 }
                                     
-                                    ]);
+]);
                             
                             
         
