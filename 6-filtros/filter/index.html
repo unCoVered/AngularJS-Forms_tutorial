@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  
+  <head>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+    <script src="//code.angularjs.org/1.2.19/i18n/angular-locale_es-es.js"></script>
+    <script src="js/script.js"></script>
+  </head>
+  
+  <body ng-controller="PruebaController"> 
+        Filtro:
+
+          <input type="text" ng-model="filtroNombreProvincia">
+
+          <hr>
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th colspan="2">filter:{ nombre:filtroNombreProvincia }:false</th>
+
+              </tr>
+
+              <tr>
+
+                <th>Codigo</th>
+
+                <th>Nombre</th>
+
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr ng-repeat="provincia in provincias | filter:{ nombre:filtroNombreProvincia }:false | orderBy:'codProvincia'">
+
+                <td>{{provincia.idProvincia}}</td>
+
+                <td>{{provincia.nombre}}</td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+          <hr>
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th colspan="2">filter:{ nombre:filtroNombreProvincia }:true</th>
+
+              </tr>
+
+              <tr>
+
+                <th>Codigo</th>
+
+                <th>Nombre</th>
+
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr ng-repeat="provincia in provincias | filter:{ nombre:filtroNombreProvincia }:true | orderBy:'codProvincia'">
+
+                <td>{{provincia.idProvincia}}</td>
+
+                <td>{{provincia.nombre}}</td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+          <hr>
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th colspan="2">filter:{ nombre:filtroNombreProvincia }:comparator</th>
+
+              </tr>
+
+              <tr>
+
+                <th>Codigo</th>
+
+                <th>Nombre</th>
+
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr ng-repeat="provincia in provincias | filter:{ nombre:filtroNombreProvincia }:comparator | orderBy:'codProvincia'">
+
+                <td>{{provincia.idProvincia}}</td>
+
+                <td>{{provincia.nombre}}</td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+
+
+          <br>
+
+          <br>
+
+          <br>
+
+          <br>
+
+          <br>
+
+
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th colspan="2">filter:consultaPersonalizada</th>
+
+              </tr>
+
+              <tr>
+
+                <th>Codigo</th>
+
+                <th>Nombre</th>
+
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              <tr ng-repeat="provincia in provincias | filter:consultaPersonalizada | orderBy:'codProvincia'">
+
+                <td>{{provincia.idProvincia}}</td>
+
+                <td>{{provincia.nombre}}</td>
+
+              </tr>
+
+            </tbody>
+        </table>  
+  </body>
+  
+</html>

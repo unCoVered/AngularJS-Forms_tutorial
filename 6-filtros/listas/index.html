@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  
+  <head>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+    <script src="//code.angularjs.org/1.2.19/i18n/angular-locale_es-es.js"></script>
+    <script src="js/script.js"></script>
+  </head>
+  
+  <body ng-controller="PruebaController">
+      <table>
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Nombre</th>
+            </tr>  
+        </thead>
+        <tbody>
+            <tr ng-repeat="provincia in provincias | orderBy:'nombre' | limitTo:6">
+            <td>{{provincia.codProvincia}}</td>
+            <td>{{provincia.nombre}}</td> 
+        </tbody>
+      </table> 
+  </body>
+  
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  
+  <head>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+    <script src="//code.angularjs.org/1.2.19/i18n/angular-locale_es-es.js"></script>
+    <script src="js/script.js"></script>
+  </head>
+  
+  <body ng-controller="PruebaController">
+     
+    <div>number:4 = {{ numeroDecimal | number:4 }}</div>
+    <div>number = {{ numeroDecimal | number }}</div>
+     
+    <br>
+    <br>
+     
+    <div>date:"yyyy/MM/dd" = {{ fecha | date:"yyyy/MM/dd" }}</div>
+    <div>date:"medium" = {{ fecha | date:"medium" }}</div>
+    <div>date:"short" = {{ fecha | date:"short" }}</div>
+    <div>date:"fullDate" = {{ fecha | date:"fullDate" }}</div>
+    <div>date:"longDate" = {{ fecha | date:"longDate" }}</div>
+    <div>date:"mediumDate" = {{ fecha | date:"mediumDate" }}</div>
+    <div>date:"shortDate" = {{ fecha | date:"shortDate" }}</div>
+    <div>date:"mediumTime" = {{ fecha | date:"mediumTime" }}</div>
+    <div>date:"shortTime" = {{ fecha | date:"shortTime" }}</div>
+    <div>date = {{ fecha | date }}</div>
+     
+    <br>
+    <br>
+     
+    <div>currency = {{ numeroDecimal | currency }}</div>
+     
+    <br>
+    <br>
+     
+    <div>lowercase = {{ texto | lowercase }}</div>
+     
+    <br>
+    <br>
+     
+    <div>uppercase = {{ texto | uppercase }}</div>
+ 
+ 
+  </body>
+  
+</html>
