@@ -7,6 +7,7 @@ Filtrar por apellido: <input ng-model="filtro.ape1">
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Sexo</th>
+            <th>Accion</th>
         </tr>
     </thead>
     <tfoot>
@@ -26,6 +27,11 @@ Filtrar por apellido: <input ng-model="filtro.ape1">
                 <span ng-switch-when=""></span>
                 <span ng-switch-default>Desconocido</span>
             </td>
+            <td>
+                <button ng-click="borrar(seguro.idSeguro)">Borrar</button>
+            </td>
         </tr>
     </tbody>
+    
+    <a href="#/seguro/new">Nuevo Seguro Medico</a>
 </table>

@@ -1,7 +1,7 @@
 package cursoangularjs.jackson;
 
-/**
- * Created by alex on 09/10/15.
- */
-public interface JsonTransformer {
+public interface JsonTransformer
+{
+    String toJson(Object data);
+    <T> T fromJson(String json, Class<T> classt);
 }

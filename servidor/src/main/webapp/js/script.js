@@ -7,11 +7,15 @@ function RemoteResource($http, $q, baseUrl) {
         
         $http({
             method : 'GET',
-            url : baseUrl + '/datos/datos' + idSeguro + '.json'
+            url : baseUrl + '/api/SeguroMedico/' + idSeguro
         }).success(function (data, status, headers, config) {
             defered.resolve(data);
         }).error(function (data, status, headers, config) {
-            defered.reject(status);
+            if (status === 400) {
+                defered.reject(status);
+            } else {
+                throw new Error("Fallo obtener los datos: " + status + "\n" + data);
+            }
         });
         
         return promise;
@@ -23,16 +27,82 @@ function RemoteResource($http, $q, baseUrl) {
         
         $http({
             method : 'GET',
-            url : baseUrl + '/datos/listado_seguros.json'
+            url : baseUrl + '/api/Seguromedico'
         }).success(function (data, status, headers, config) {
             defered.resolve(data);
         }).error(function (data, status, headers, config) {
-            defered.reject(status);
+            if (status === 400) {
+                defered.reject(status);
+            } else {
+                throw new Error("Fallo obtener los datos: " + status + "\n" + data);
+            }
         });
         
         return promise;
-        
     };
+    
+    this.insert = function (seguroMedico) {
+        var defered = $q.defer();
+        var promise = defered.promise;
+        
+        $http({
+            method : 'POST',
+            url : baseUrl + '/api/SeguroMedico',
+            data : seguroMedico
+        }).success(function (data, status, headers, config) {
+            defered.resolve(data);
+        }).error(function (data, status, headers, config) {
+            if (status === 400) {
+                defered.reject(status);
+            } else {
+                throw new Error("Fallo obtener los datos: " + status + "\n" + data);
+            }
+        });
+        
+        return promise;
+    };
+    
+    this.update = function (idSeguro, seguroMedico) {
+        var defered = $q.defer();
+        var promise = defered.promise;
+        
+        $http({
+            method : 'PUT',
+            url : baseUrl = '/api/Seguromedico/' + idSeguro,
+            data : seguroMedico
+        }).success(function (data, status, headers, config) {
+            defered.resolve(data);
+        }).error(function (data, status, headers, config) {
+            if (status === 400) {
+                defered.reject(status);
+            } else {
+                throw new Error("Fallo obtener los datos: " + status + "\n" + data);
+            }
+        });
+        
+        return promise;
+    };
+    
+    this.delete = function (idSeguro) {
+        var defered = $q.defer();
+        var prmose = defered.promise;
+        
+        $http({
+            method : 'DELETE',
+            url : baseUrl + '/api/SeguroMedico/' + idSeguro
+        }).success(function (data, status, headers, config) {
+            defered.resolve(data);
+        }).error(function (data, status, headers, config) {
+            if (status === 400) {
+            defered.reject(data);
+        } else {
+            throw new Error("Fallo obtener los datos:" + status + "\n" + data);
+        }
+    });
+ 
+    return promise;
+};
+            
 }
 
 function RemoteResourceProvider() {
@@ -111,6 +181,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         templateUrl : "main.html",
         controller : "MainController"
     });
+    
     $routeProvider.when('/seguro/listado', {
         templateUrl : "listado.html",
         controller : "ListadoSeguroController",
@@ -120,21 +191,28 @@ app.config(['$routeProvider', function ($routeProvider) {
             }]
         }
     });
+    
     $routeProvider.when('/seguro/edit/:idSeguro', {
         templateUrl : "detalle.html",
-        controller : "DetalleSeguroController",
+        controller : "EditSeguroController",
         resolve : {
             seguro : ['remoteResource', '$route', function (remoteResource, $route) {
                 return remoteResource.get($route.current.params.idSeguro);
             }]
         }
     });
+    
+    $routeProvider.when('/seguro/new', {
+        templateUrl : "detalle.html",
+        controller : "NewSeguroController"
+    });
+    
     $routeProvider.otherwise({
         redirectTo : '/'
     });
 }]);
 
-app.controller("DetalleSeguroController", ['$scope', 'seguro', function ($scope, seguro) {
+app.controller("EditSeguroController", ['$scope', 'seguro', 'remoteResource', '$location', function ($scope, seguro, remoteResource, $location) {
     $scope.filtro = {
         ape1: ""
     };
@@ -147,6 +225,49 @@ app.controller("DetalleSeguroController", ['$scope', 'seguro', function ($scope,
         descripcion: "Mujer"
     }];
 
+    $scope.seguro = seguro;
+
+    $scope.guardar = function () {
+        if ($scope.form.$valid) {
+            remoteResource.update($scope.seguro.idSeguro, $scope.seguro).then(function () {
+                $location.path("/seguro/listado");
+            }, function (bussinessMessages) {
+                $scope.businessMessages = bussinessMessages;
+            });
+        } else {
+            alert("Hay datos inválidos");
+        }
+    };
+
+}]);
+
+app.controller("ListadoSeguroController", ['$scope', 'seguros', 'remoteResource', function ($scope, seguros, remoteResource) {
+    $scope.seguros = seguros;
+    
+    $scope.borrar = function (idSeguro) {
+        remoteResource.delete(idSeguro).then(function () {
+            remoteResource.list().then(function (seguros) {
+                $scope.seguros = seguros;
+            }, function (bussinessMessages) {
+                $scope.businessMessages = bussinessMessages;
+            });
+        });
+    };
+}]);
+
+app.controller("NewSeguroController", ['$scope', 'remoteResource', '$location', function ($scope, remoteResource, $location) {
+    $scope.filtro = {
+        ape1 : ""
+    };
+    
+    $scope.sexos = [{
+        codSexo : "H",
+        descripcion: "Hombre"
+    }, {
+        codSexo : "M",
+        descripcion: "Mujer"
+    }];
+    
     $scope.seguro = {
         nif : "",
         nombre : "",
@@ -170,22 +291,20 @@ app.controller("DetalleSeguroController", ['$scope', 'seguro', function ($scope,
         },
         fechaCreacion : new Date()
     };
-
-    $scope.seguro = seguro;
-
+    
     $scope.guardar = function () {
         if ($scope.form.$valid) {
-            alert("Los datos aqui se habrían enviado al servidor  y estarían validados en la parte cliente");
+            remoteResource.insert($scope.seguro).then(function () {
+                $location.path("/seguro/listado");
+            }, function (bussinessMessages) {
+                $scope.businessMessages = bussinessMessages;
+            });
         } else {
             alert("Hay datos inválidos");
         }
     };
-
-}]);
-
-app.controller("ListadoSeguroController", ['$scope', 'seguros', function ($scope, seguros) {
-    $scope.seguros = seguros;
-}]);
+        
+}
 
 app.controller("MainController", ['$scope', function ($scope) {
 

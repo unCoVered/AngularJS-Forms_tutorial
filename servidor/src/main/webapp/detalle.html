@@ -1,5 +1,17 @@
 <a href="#/seguro/listado">Volver</a>
 
+<div ng-show="businessMessages.length > 0">
+    <div>Se han producido los siguientes errores</div>
+    <ul>
+        <li ng-repeat="businessMessage in businessMessages">
+            <strong ng-hide="businessMessage.fieldName == null">{{businessMessage.fieldName}}:</strong>
+            {{businessMessage.message}}.
+        </li>
+    </ul>
+    <button ng-click="businessMessages = []" >Quitar mensajes</button>
+</div>
+
+
 <form name="form" novalidate>
     <fieldset>
         <legend>Seguro Medico</legend>
